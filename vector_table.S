@@ -19,7 +19,7 @@
  * The vector table.
  */
 .type vtable, %object
-.size vtable, .-vtable
+.section .vector_table,"a",%progbits
 vtable:
     .word _estack
     .word reset_handler
@@ -136,6 +136,7 @@ vtable:
     .thumb_set SPI1_IRQ_handler,default_interrupt_handler
     .weak USART1_IRQ_handler
     .thumb_set USART1_IRQ_handler,default_interrupt_handler
+.size vtable, .-vtable
 
 /*
  * A 'Default' interrupt handler. This is where interrupts
