@@ -48,8 +48,8 @@ SECTIONS
 
   /* The 'data' section is space set aside in RAM for
    * things like variables, which can change. */
-  _sidata = LOADADDR(.data);
-  .data :
+  _sidata = .;
+  .data : AT(_sidata)
   {
     . = ALIGN(4);
     /* Mark start/end locations for the 'data' section. */
