@@ -78,6 +78,15 @@ reset_handler:
     // rcc_cr2_base:          0x40021034
     // When the system boots, HSI is enabled and selected
     // as the clock source. So that's already done.
+    // Reset/set the Flash ACR to enable prefetching and
+    // use a 1-wait state.
+    LDR  r0, =0x40022000
+    LDR  r2, =0xFFFFFFE8
+    LDR  r1, [r0]
+    ANDS r1, r1, r2
+    LDR  r2, =0x00000011
+    ORRS r1, r1, r2
+    STR  r1, [r0]
     // Configure the PLL to (HSI / 2) * 12. (PLLMUL: 0xA)
     // (PLLSRC should already be set to 0 for HSI/2.)
     LDR  r0, =0x40021004
